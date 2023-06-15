@@ -1,0 +1,39 @@
+{
+  "executionRoleArn": "arn:aws:iam::166826642036:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "%container_name%",
+      "image": "166826642036.dkr.ecr.eu-central-1.amazonaws.com/%ms_name%:%tag_version%",
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/%logs_location%",
+          "awslogs-region": "%logs_region%",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
+      "environment": [
+        {
+          "name": "SPRING_PROFILES_ACTIVE",
+          "value": "%SPRING_PROFILES_ACTIVE%"
+        }
+      ]
+    }
+  ],
+  "placementConstraints": [],
+  "memory": "512",
+  "taskRoleArn": "arn:aws:iam::166826642036:role/ecsTaskExecutionRole",
+  "family": "%ms_name%",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "networkMode": "awsvpc",
+  "cpu": "256"
+}

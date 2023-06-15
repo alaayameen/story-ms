@@ -1,0 +1,76 @@
+awsParameterStorePropertySource:
+  enabled: true
+ms:
+  basepath: story
+
+auth:
+  jwt:
+    jwtRefreshExpirationMs: 2220000
+    issuer: "Social App"
+    audience: "Social App"
+    timeToLiveInSeconds: 120000
+    secret: "qqqqqqqqUWNIRAgQkRf28DiB4mUJCFx+ILqZCV2cnQQfkTpWH/4r2Tx3VvhuH1RKfwDCMsjJ1kIDZYx0iBpH2RFedqJ3WTdVJr9Jg0yI0nKqdDYfaYRh58hLpVVZg3WE3pmlaNqhXT5ZcOQ144wDitFn1/d9iIrj7n8KDlSSpGWP1RyxBczR7N0V8gP8Kyggt8cFCyU4CYszcbAwPgfYdZSA=="
+    excludedList:
+      - /story/test
+    adminList:
+      - /story/v1/deleteStoriesByUserIds
+      - /story/v1/{storyId}/softDeleteByReportContent
+      - /story/v1/{storyId}/restoreDeletedContentByReport
+      - /story/v1/{contentId}/hardDeleteByAdmin
+      - /story/v1/{userId}/invertUserStatus
+      - /story/v1/{userId}/softDeleteRestoreContentByDeleteAccount
+      - /story/v1/{storyId}/getStoryById
+
+spring:
+  application:
+    name: story-service
+  data:
+    mongodb:
+      auto-index-creation: true
+      uri: ${/config/dev/ssm/service/mongo_url}/story_r1?retryWrites=true
+  jackson:
+      default-property-inclusion: NON_NULL
+
+aws:
+  cloudmap:
+    enabled: true
+    namespace: ${/config/dev/ssm/service/aws.cloudmap.namespace}
+  clients:
+    user-ms:
+      fullHost: http://social-dev-1483736625.eu-central-1.elb.amazonaws.com
+      serviceName: user-ms-v1
+      port: 80
+      protocol: http://
+    follow-ms:
+      fullHost: http://social-dev-1483736625.eu-central-1.elb.amazonaws.com
+      serviceName: follow-ms-v1
+      port: 80
+      protocol: http://
+
+server:
+  error:
+    include-binding-errors: always
+    include-message: always
+  port: 80
+
+logging:
+  level:
+    root: ${/config/dev/ssm/service/logging_root_level}
+    org.springframework.web: ERROR
+    com.social: ${/config/dev/ssm/service/logging_com_social_level}
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%X{Trx-Id}] [%thread] %-5level %logger{36} - %msg%n"
+document:
+  bucket-name: story-social
+url:
+  expiry: 600000
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: eu-central-1
+      accessKeyId: RETYGDFV5ERJ2NIUKQ765
+      secretKey: Yrk12YVMalYewsaxl4mDoFPR0aPYfAgkYHIK9W5C
+    mediaconvert:
+      role: arn:aws:iam::166826642036:role/service-role/App_MediaConvert_Default_Role

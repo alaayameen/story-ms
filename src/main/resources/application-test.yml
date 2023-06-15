@@ -1,0 +1,78 @@
+ms:
+  basepath: story
+
+auth:
+  jwt:
+    jwtRefreshExpirationMs: 2220000
+    issuer: "Social App"
+    audience: "Social App"
+    timeToLiveInSeconds: 120000
+    secret: "nrn81Ww9dACgowcWPRQMz9UWNIRAgQkRf28DiB4mUJCFx+ILqZCV2cnQQfkTpWH/4r2Tx3VvhuH1RKfwDCMsjJ1kIDZYx0iBpH2RFedqJ3WTdVJr9Jg0yI0nKqdDYfaYRh58hLpVVZg3WE3pmlaNqhXT5ZcOQ144wDitFn1/d9iIrj7n8KDlSSpGWP1RyxBczR7N0V8gP8Kyggt8cFCyU4CYszcbAwPgfYdZSA=="
+    excludedList:
+
+aws:
+  cloudmap:
+    enabled: false
+    namespace: dev
+  clients:
+    user-ms:
+      fullHost: http://social-dev-1483736625.eu-central-1.elb.amazonaws.com
+      serviceName: user-ms-v1
+      port: 80
+      protocol: http://
+    follow-ms:
+      fullHost: http://social-dev-1483736625.eu-central-1.elb.amazonaws.com
+      serviceName: follow-ms-v1
+      port: 80
+      protocol: http://
+
+awsParameterStorePropertySource:
+  enabled: true
+
+host: ec2-52-29-192-251.eu-central-1.compute.amazonaws.com
+spring:
+  application:
+    name: story-service
+  data:
+    mongodb:
+      auto-index-creation: true
+      uri: mongodb://localhost:27017/story?retryWrites=true
+  jackson:
+      default-property-inclusion: NON_NULL
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+    org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG
+    org.springframework.data.mongodb.repository.query: DEBUG
+    org.springframework.data.mongodb.core.mapping: DEBUG
+    org.springframework.transaction: DEBUG
+    com.social: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%X{Trx-Id}] [%thread] %-5level %logger{36} - %msg%n"
+
+document:
+  bucket-name: story-social
+url:
+  expiry: 600000
+  
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: eu-central-1
+      accessKeyId: AKIASNV5ERJ2NIUKQ765
+      secretKey: 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
+    mediaconvert:
+      role: arn:aws:iam::166826642036:role/service-role/OpTube_MediaConvert_Default_Role
+
+
+server:
+  error:
+    include-binding-errors: always
+    include-message: always
+  port: 8087
+

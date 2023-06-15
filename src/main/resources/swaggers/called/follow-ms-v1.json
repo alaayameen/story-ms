@@ -1,0 +1,2330 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Social Follow APIs",
+    "description": "API description in Follow.",
+    "version": "1.0.1"
+  },
+  "host": "api.social.com",
+  "basePath": "/follow/v1",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/followUser": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "follow User.",
+        "description": "follow User.",
+        "operationId": "followUser",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "followUserRequest",
+            "schema": {
+              "$ref": "#/definitions/FollowUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NO_CONTENT"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/unfollowUser": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "unfollow User.",
+        "description": "unfollow User.",
+        "operationId": "unfollowUser",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "followUserRequest",
+            "schema": {
+              "$ref": "#/definitions/UnfollowUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NO_CONTENT"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getSharingFollowings": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "get followings for shared content type",
+        "description": "get followings for shared content type.",
+        "operationId": "getSharingFollowings",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+         {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "number",
+            "required": false,
+            "default": 1,
+            "description": "Page Number to get."
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "type": "number",
+            "required": false,
+            "default": 10,
+            "description": "page size of items to return."
+          },
+          {
+            "in": "body",
+            "name": "shareContentRequest",
+            "schema": {
+              "$ref": "#/definitions/ShareContentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of GetAllFollowingIdsRespond",
+            "schema": {
+              "$ref": "#/definitions/GetAllFollowingIdsRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{userId}/trackSharedContent": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "track shared content for follow User.",
+        "description": "track shared content for follow User.",
+        "operationId": "trackSharedContent",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "shareContentRequest",
+            "schema": {
+              "$ref": "#/definitions/ShareContentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NO_CONTENT"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blockUser": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "Block User.",
+        "description": "Block User.",
+        "operationId": "blockUser",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "BlockUserRequest",
+            "schema": {
+              "$ref": "#/definitions/BlockUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NO_CONTENT"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/unblockUser": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "unblock User.",
+        "description": "unblock User.",
+        "operationId": "unblockUser",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "unblockUserRequest",
+            "schema": {
+              "$ref": "#/definitions/UnblockUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NO_CONTENT"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/retrieveFollowersAndFollowings": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "retrieve Followers And Followings.",
+        "description": "this api will be called to get both Followers And Followings in the same response, it will be sorted by added date desc, this api also support pagination.",
+        "operationId": "retrieveFollowersAndFollowings",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "number",
+            "required": false,
+            "default": 1,
+            "description": "Page Number to get."
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "type": "number",
+            "required": false,
+            "default": 10,
+            "description": "page size of items to return."
+          },
+          {
+            "in": "query",
+            "name": "sortFriends",
+            "description": "by default it will get both FOLLOWER and FOLLOWING.",
+            "required": false,
+            "type": "string",
+            "default": "BOTH",
+            "enum": [
+              "FOLLOWER",
+              "FOLLOWING",
+              "BOTH"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of RetrieveFollowersAndFollowingsRespond",
+            "schema": {
+              "$ref": "#/definitions/RetrieveFollowersAndFollowingsRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/retrieveBlockList": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "retrieve Blocked user.",
+        "description": "this api will be called to get blocked list",
+        "operationId": "retrieveBlockList",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "number",
+            "required": false,
+            "default": 1,
+            "description": "Page Number to get."
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "type": "number",
+            "required": false,
+            "default": 10,
+            "description": "page size of items to return."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of RetrieveBlockList",
+            "schema": {
+              "$ref": "#/definitions/RetrieveBlockListRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getFollowingStatus": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "get Following Status.",
+        "description": "this api will get for each user if its following by the user or not",
+        "operationId": "getFollowingStatus",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "GetFollowingStatusRequest",
+            "schema": {
+              "$ref": "#/definitions/GetFollowingStatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of GetFollowingStatusRespond",
+            "schema": {
+              "$ref": "#/definitions/GetFollowingStatusRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getAllFollowingUsers": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "get all user following ids",
+        "description": "get all user following ids",
+        "operationId": "getAllFollowingUsers",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "userId",
+            "type": "string",
+            "required": false,
+            "description": "The user Id to get following users. If not provided, following users will be returned for logged in user."
+          }          
+        ],
+        "responses": {
+          "200": {
+            "description": "Get",
+            "schema": {
+              "$ref": "#/definitions/GetAllFollowingIdsRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },    
+    "/user/{userId}/getTotalFollowingAndFollowers": {
+      "get": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "get Total Following And Followers",
+        "description": "get Total Following And Followers",
+        "operationId": "getTotalFollowingAndFollowers",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "startTime",
+            "type": "string",
+            "format": "dateTime",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "endTime",
+            "type": "string",
+            "format": "dateTime",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of GetTotalFollowingAndFollowersResponse",
+            "schema": {
+              "$ref": "#/definitions/GetTotalFollowingAndFollowersResponse"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/searchPeople": {
+      "get": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Retrieve Users with search option.",
+        "description": "Retrieve Users - first show the popular (trending) users the api will search for the entered text - in case its empty or null it will get all",
+        "operationId": "searchPeople",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "searchText",
+            "type": "string",
+            "required": false,
+            "description": "the text that searched for - optional input in case its empty will retrieve all, in case it was populated it will search the entered word by name or userName."
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "required": false,
+            "default": 1,
+            "description": "Page Number to get."
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "type": "integer",
+            "required": false,
+            "default": 10,
+            "description": "page size of items to return."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of SearchPeopleRespond",
+            "schema": {
+              "$ref": "#/definitions/SearchPeopleRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/addUpdateFollowUser": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "add/update follow User.",
+        "description": "add/update follow User.",
+        "operationId": "addUpdateFollowUser",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "addUpdateFollowUserRequest",
+            "schema": {
+              "$ref": "#/definitions/AddUpdateFollowUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NO_CONTENT"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{userId}/isBlocked": {
+      "get": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "Check if the users is blocked",
+        "description": "this api will return if the user is blocked",
+        "operationId": "isBlocked",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "string",
+            "required": true,
+            "description": "the user id we need to get its followings."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "True if user is blocked",
+            "schema": {
+              "description": "Check if user is blocked",
+              "type": "boolean"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{userId}/isBlockingMe": {
+      "get": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "Check if the user is blocked by target user",
+        "description": "this api will return if the user is blocked by target user",
+        "operationId": "isBlockingMe",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "string",
+            "required": true,
+            "description": "the user id we need to get its followings."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "True if user is blocked",
+            "schema": {
+              "description": "Check if user is blocked",
+              "type": "boolean"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deleteFollowInfoByUserIds": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "Delete users follow info by ids.",
+        "description": "Delete users follow info by ids.",
+        "operationId": "deleteFollowInfoByUserIds",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "DeleteFollowInfoByUserIdsRequest",
+            "schema": {
+              "$ref": "#/definitions/DeleteFollowInfoByUserIdsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of DeleteFollowInfoByUserIdsRespond",
+            "schema": {
+              "$ref": "#/definitions/DeleteFollowInfoByUserIdsRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/favorities/getTopUsersToFollow": {
+      "get": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Retrieve top N users to follow based on certain attribute, such as user's favorities, or user's country",
+        "description": "This API retrieves top N users to follow based on certain attribute, e.g. user's favorities, or user's country. This API also consider number of followers for the user's in addition to the provided attribute.",
+        "operationId": "getTopUsersToFollow",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "fieldValue",
+            "description": "The list of field values to get top users for them. Example: list of user favorites, Or list of countries.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+				"type": "string"
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "number",
+            "format": "int32",
+            "required": false,
+            "default": 10,
+            "description": "Top number to return, default value is top 10 videos by category to be returned."
+          },
+          {
+            "in": "query",
+            "name": "fieldName",
+            "type": "string",
+            "required": false,
+            "default": "userFavorities",
+            "description": "The group by field name, used to retruned top users according it. Default value is userFavorities attribute. Another possible value could be the country attribute name."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieve users Ids",
+            "schema": {
+              "$ref": "#/definitions/TopUsersToFollowResponse"
+            }
+           },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getUsersFollowSummary": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "Get users follow summary.",
+        "description": "Getting users follow summary, is blocked user, is blocking me user, and friend type (Follow, Following, Both)",
+        "operationId": "getUsersFollowSummary",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+			"in": "body",
+			"name": "UserFollowSummaryRequest",
+			"description": "Users Id to return users follow summary for them",
+			"schema": {
+				"$ref": "#/definitions/UserFollowSummaryRequest"
+			}
+		}
+	],
+        "responses": {
+			"200": {
+				"description": "A JSON of UserFollowSummaryListRespond",
+				"schema": {
+					"$ref": "#/definitions/UserFollowSummaryListRespond"
+				}
+			},
+			"400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/getTotalFollowingAndFollowersPerUsers": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "Getting total number of followers and followings for given users Id list.",
+        "description": "Getting total number of followers and followings for given users Id list.",
+        "operationId": "getTotalFollowingAndFollowersPerUsers",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "GetTotalFollowingAndFollowersPerUsersRequest",
+            "schema": {
+              "$ref": "#/definitions/GetTotalFollowingAndFollowersPerUsersRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of GetTotalFollowingAndFollowersPerUsersResponse",
+            "schema": {
+              "$ref": "#/definitions/GetTotalFollowingAndFollowersPerUsersResponse"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+   "/{userId}/getAllFollowingUsers": {
+      "post": {
+        "tags": [
+          "follow"
+        ],
+        "summary": "get all user following ids",
+        "description": "get all user following ids",
+        "operationId": "getAllFollowingUsersByUserId",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "string",
+            "required": true,
+            "description": "the user id we need to get its followings."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get",
+            "schema": {
+              "$ref": "#/definitions/GetAllFollowingIdsRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PaginationInfo": {
+      "type": "object",
+      "properties": {
+        "pageNumber": {
+          "description": "Current page number",
+          "type": "integer"
+        },
+        "pageSize": {
+          "description": "Number of returned items",
+          "type": "integer"
+        },
+        "totalElements": {
+          "description": "Total number of items",
+          "type": "integer"
+        },
+        "totalPages": {
+          "description": "Total number of pages",
+          "type": "integer"
+        }
+      }
+    },
+    "FollowUserRequest": {
+      "description": "The Follow User Request",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "description": "The UserId of the one that wants to follow.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    },
+    "AddUpdateFollowUserRequest": {
+      "description": "The Follow User Request",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "userName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "profilePictureUrl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "country": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "userFavorities":{
+        	"type": "array",
+			"items": {
+                "$ref": "#/definitions/userFavoritiesEnum"
+			}
+		}
+      }
+    },
+    "UnfollowUserRequest": {
+      "description": "The Unfollow User Request",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "description": "The UserId of the one that wants to unfollow.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    },
+    "BlockUserRequest": {
+      "description": "The Block User Request",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "description": "The UserId of the one that wants to block.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    },
+    "UnblockUserRequest": {
+      "description": "The Unblock User Request",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "description": "The UserId of the one that wants to unblock.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    },
+    "publicFollowUserInfo": {
+      "description": "public User Info Object",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "userName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "profilePictureUrl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "agoraUserId": {
+          "type": "string"
+        },
+        "friendType": {
+          "type": "string",
+          "enum": [
+            "FOLLOWER",
+            "FOLLOWING",
+            "BOTH",
+            "BLOCKING",
+            "BLOCKED"
+          ]
+        }
+      }
+    },
+    "TopUsersToFollowResponse": {
+      "description": "Top users to follow.",
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/topUsersToFollowDetailsResponse"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "topUsersToFollowDetailsResponse": {
+      "description": "Top Users info to follow",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "numberOfFollowers": {
+          "type": "number",
+          "format": "int64"
+        }
+      }
+    },
+    "userFavoritiesEnum": {
+		"description": "User favorities Enum values",
+		"type": "string",
+		"enum": [
+		  "Film&Animation",
+		  "Autos&Vehicles",
+		  "Music",
+		  "Pets&Animals",
+		  "Sports",
+		  "Travel&Events",
+		  "Gaming",
+		  "People & Blogs",
+		  "Comedy",
+		  "Entertainment",
+		  "News&Politics",
+		  "Howto&Style",
+		  "Education",
+		  "Science&Technology",
+		  "Nonprofits&Activism"
+		]
+    },
+    "RetrieveFollowersAndFollowingsRespond": {
+      "description": "The Retrieve Followers And Followings Respond.",
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/publicFollowUserInfo"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/PaginationInfo"
+        }
+      ]
+    },
+    "RetrieveBlockListRespond": {
+      "description": "The Retrieve Block List Respond.",
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/publicFollowUserInfo"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/PaginationInfo"
+        }
+      ]
+    },
+    "UserFollowSummaryListRespond": {
+      "description": "The follow summary List respond.",
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserFollowSummary"
+              }
+            }
+          }
+        }
+      ]
+    },
+   "UserFollowSummary": {
+      "description": "User follow summary object",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "isBlocked": {
+          "type": "boolean",
+          "default": false
+        },
+        "isBlockingMe": {
+          "type": "boolean",
+          "default": false
+        },
+        "friendType": {
+          "type": "string",
+          "default": ""
+        }
+      }
+    },
+    "UserFollowSummaryRequest": {
+      "type": "object",
+      "properties": {
+        "usersId": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "usersId"
+      ]
+    },
+    "GetFollowingStatusRequest": {
+      "type": "object",
+      "properties": {
+        "usersIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+		"withBlockInfo": {
+         	"type": "boolean",
+            "default": false
+        }
+      },
+      "required": [
+        "usersIds"
+      ]
+    },
+ 	"GetFollowingStatusRespond": {
+		"type": "array",
+		"items": {
+			"type": "object",
+			"properties": {
+				"userId": {
+					"type": "string"
+				},
+				"following": {
+					"type": "boolean",
+					"default": false
+				},
+				"follower": {
+					"type": "boolean",
+					"default": false
+				},
+				"totalFollowings": {
+					"type": "number",
+					"default": 0
+				},
+				"totalFollowers": {
+					"type": "number",
+					"default": 0
+			},
+                   "isBlocked": { 
+                        "type": "boolean"
+          		}, 
+    			"isBlockingMe": { 
+            		"type": "boolean"      
+    			}, 
+    			"friendType": { 
+            		"type": "string" 
+	    		} 
+	    	}
+		}
+	},
+    "GetAllFollowingIdsRespond": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "GetTotalFollowingAndFollowersResponse": {
+      "type": "object",
+      "properties": {
+        "totalFollowings": {
+          "type": "number"
+        },
+        "totalFollowers": {
+          "type": "number"
+        }
+      }
+    },
+    "GetTotalFollowingAndFollowersPerUsersRequest": {
+      "type": "object",
+      "properties": {
+        "usersIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "usersIds"
+      ]
+    },
+    "GetTotalFollowingAndFollowersPerUsersResponse": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "totalFollowings": {
+            "type": "number",
+            "default": 0
+          },
+          "totalFollowers": {
+            "type": "number",
+            "default": 0
+          }
+        }
+      }
+    },
+    "FollowUsersRespond": {
+      "description": "The Retrieve List of users Respond.",
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/publicFollowUserInfo"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/PaginationInfo"
+        }
+      ]
+    },
+    "SearchPeopleUserInfo": {
+      "description": "public User Info Object",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "userName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "profilePictureUrl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "friendType": {
+          "type": "string",
+          "enum": [
+            "FOLLOWER",
+            "FOLLOWING",
+            "BOTH"
+          ]
+        }
+      }
+    },
+    "ShareContentRequest":{
+	  "description": "update follow user content time",
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "enum": [
+            "VIDEO",
+            "POST",
+            "STORY"
+          ]
+        }
+	  }
+	},
+    "SearchPeopleRespond": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SearchPeopleUserInfo"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/PaginationInfo"
+        }
+      ]
+    },
+    "DeleteFollowInfoByUserIdsRequest": {
+      "description": "The delete users follow info by ids request",
+      "type": "object",
+      "properties": {
+        "usersIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+          }
+        }
+      },
+      "required": [
+        "usersIds"
+      ]
+    },
+    "DeleteFollowInfoByUserIdsRespond": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DeleteUsersStatus"
+      }
+    },
+    "DeleteUsersStatus": {
+      "description": "Delete users follow info status per user",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "deleteStatus": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

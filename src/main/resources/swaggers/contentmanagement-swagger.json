@@ -1,0 +1,426 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Social Story API",
+    "description": "API description in User.",
+    "version": "1.0.1"
+  },
+  "host": "api.social.com",
+  "basePath": "/story/v1",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/content-management/manageContentById": {
+      "post": {
+        "tags": [
+          "content-management"
+        ],
+        "summary": "Content management actions by user ids.",
+        "description": "Delete/restore/ban content by user ids.",
+        "operationId": "manageContentByContentId",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "ContentManagementRequest",
+            "schema": {
+              "$ref": "#/definitions/ContentManagementRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content-management/report/softDeletes": {
+      "post": {
+        "tags": [
+          "content-management-report"
+        ],
+        "summary": "get all soft delete operations",
+        "description": "get all soft delete operations",
+        "operationId": "getSoftDeleteOperations",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "required": false,
+            "default": 1,
+            "description": "Page Number to get."
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "type": "integer",
+            "required": false,
+            "default": 10,
+            "description": "page size of items to return."
+          },
+          {
+            "in": "body",
+            "name": "criteria",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DeleteOperationsCriteria"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON of GetDeleteOperationsReportRespond",
+            "schema": {
+              "$ref": "#/definitions/GetDeleteOperationsReportRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContentManagementRequest": {
+      "description": "content management by id request",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "idType": {"type": "string", "enum": ["USER_ID", "CONTENT_ID"]},
+        "reportId": {"type":  "string"},
+        "contentCommand": {
+          "type": "string",
+          "enum": [
+            "DIRECT_ADMIN_SOFT_DELETE", "DIRECT_ADMIN_RESTORE_CONTENT", "DIRECT_ADMIN_HARD_DELETE",
+            "REPORT_SOFT_DELETE", "REPORT_RESTORE_DELETE", "REPORT_HARD_DELETE",
+            "DELETE_ACCOUNT_SOFT_DELETE", "DELETE_ACCOUNT_RESTORE_CONTENT",
+            "BAN_ACCOUNT", "UN_BAN_ACCOUNT"]
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id", "contentCommand", "idType"
+      ]
+    },
+    "DateFilter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "enum": ["eq", "gt", "gte", "lt", "lte"]
+        },
+        "value": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["operation", "value"]
+    },
+    "StringFilter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "enum": ["eq", "like", "gt", "gte", "lt", "lte"]
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": ["operation", "value"]
+    },
+    "DeleteOperationsCriteria": {
+      "type": "object",
+      "properties": {
+        "deletedBy": {
+          "$ref": "#/definitions/StringFilter"
+        },
+        "userId": {
+          "$ref": "#/definitions/StringFilter"
+        },
+        "reportId": {
+          "$ref": "#/definitions/StringFilter"
+        },
+        "command": {
+          "$ref": "#/definitions/StringFilter"
+        },
+        "deletedDate": {
+          "$ref": "#/definitions/DateFilter"
+        }
+      }
+    },
+    "GetDeleteOperationsReportRespond": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "trashList": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TrashDetails"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/PaginationInfo"
+        }
+      ]
+    },
+    "PaginationInfo": {
+      "type": "object",
+      "properties": {
+        "pageNumber": {
+          "description": "Current page number",
+          "type": "integer"
+        },
+        "pageSize": {
+          "description": "Number of returned items",
+          "type": "integer"
+        },
+        "totalElements": {
+          "description": "Total number of items",
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "description": "Total number of pages",
+          "type": "integer"
+        }
+      }
+    },
+    "TrashDetails": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "command": {
+          "type": "string"
+        },
+        "deleteBy": {
+          "type": "string"
+        },
+        "reportId": {
+          "type": "string"
+        },
+        "deleteDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "storyDetails": {
+          "$ref": "#/definitions/StoryDetails"
+        }
+      }
+    },
+    "StoryDetails": {
+      "type": "object",
+      "properties": {
+        "storyId": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "mediaDetails": {
+          "$ref": "#/definitions/MediaDetails"
+        },
+        "hashtags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HashtagDetails"
+          }
+        }
+      }
+    },
+    "MediaDetails": {
+      "description": "media Details Object",
+      "type": "object",
+      "properties": {
+        "mediaType": {
+          "type": "string",
+          "enum": [
+            "VIDEO",
+            "IMAGE"
+          ]
+        },
+        "mediaUrl": {
+          "type": "string"
+        },
+        "thumb": {
+          "type": "string"
+        },
+        "soundDetails": {
+          "$ref": "#/definitions/SoundDetails"
+        }
+      },
+      "required": [
+        "mediaType",
+        "mediaUrl"
+      ]
+    },
+    "SoundDetails": {
+      "description": "Sound Details Object",
+      "type": "object",
+      "properties": {
+        "soundUrl": {
+          "type": "string"
+        },
+        "soundId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "soundUrl"
+      ]
+    },
+    "HashtagDetails": {
+      "description": "added hashtags to the story",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "hashtagId will be populated in case of using an existing hashtag.",
+          "type": "string"
+        },
+        "text": {
+          "description": "in case its a new hashtag then the text will be populated here.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

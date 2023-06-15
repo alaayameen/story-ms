@@ -1,0 +1,2452 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Social Story API",
+    "description": "API description in Story.",
+    "version": "1.0.1"
+  },
+  "host": "api.social.com",
+  "basePath": "/story/v1",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/{userId}/getFollowingStories": {
+      "get": {
+        "tags": [
+          "all stories"
+        ],
+        "summary": "Retrieve user stories based on userId and autherizated user.",
+        "description": "the api will return all the stories for the requested userId with flag seen.",
+        "operationId": "getFollowingStories",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "required": false,
+            "default": 1,
+            "description": "Page Number to get."
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "type": "integer",
+            "required": false,
+            "default": 10,
+            "description": "page size of items to return."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of GetFollowingStoriesRespond",
+            "schema": {
+              "$ref": "#/definitions/GetFollowingStoriesRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/addStory": {
+      "post": {
+        "tags": [
+          "my stories"
+        ],
+        "summary": "add new story.",
+        "description": "add new story.",
+        "operationId": "addStory",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "AddStoryRequest",
+            "schema": {
+              "$ref": "#/definitions/AddStoryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AddStoryResponse",
+            "schema": {
+              "$ref": "#/definitions/AddStoryResponse"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{storyId}/removeStory": {
+      "delete": {
+        "tags": [
+          "my stories"
+        ],
+        "summary": "remove story.",
+        "description": "remove story",
+        "operationId": "removeStory",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "storyId",
+            "type": "string",
+            "required": true,
+            "description": "the storyId."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no contect"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getMyStories": {
+      "get": {
+        "tags": [
+          "my stories"
+        ],
+        "summary": "Retrieve my user",
+        "description": "Retrieve my user",
+        "operationId": "getMyStories",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "required": false,
+            "default": 1,
+            "description": "Page Number to get."
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "type": "integer",
+            "required": false,
+            "default": 10,
+            "description": "page size of items to return."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of GetMyStoriesRespond",
+            "schema": {
+              "$ref": "#/definitions/GetMyStoriesRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getUserStories": {
+      "get": {
+        "tags": [
+          "my stories"
+        ],
+        "summary": "Retrieve user stories",
+        "description": "Retrieve user stories",
+        "operationId": "getUserStories",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "required": false,
+            "default": 1,
+            "description": "Page Number to get."
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "type": "integer",
+            "required": false,
+            "default": 10,
+            "description": "page size of items to return."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of GetMyStoriesRespond",
+            "schema": {
+              "$ref": "#/definitions/GetMyStoriesRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{storyId}/getSeenUsers": {
+      "get": {
+        "tags": [
+          "my stories"
+        ],
+        "summary": "Retrieve story seen by users",
+        "description": "Retrieve story seen by users",
+        "operationId": "getSeenUsersByStoryId",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "required": false,
+            "default": 1,
+            "description": "Page Number to get."
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "type": "integer",
+            "required": false,
+            "default": 10,
+            "description": "page size of items to return."
+          },
+          {
+            "in": "path",
+            "name": "storyId",
+            "type": "string",
+            "required": true,
+            "description": "storyId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of GetMyStoriesRespond",
+            "schema": {
+              "$ref": "#/definitions/PublicUserInfoRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{storyId}/markAsSeen": {
+      "post": {
+        "tags": [
+          "all stories"
+        ],
+        "summary": "mark story As Viewed.",
+        "description": "mark story As Viewed.",
+        "operationId": "markStoryAsViewed",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "storyId",
+            "type": "string",
+            "required": true,
+            "description": "storyId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Output Body"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{storyId}/getStoryById": {
+      "get": {
+        "tags": [
+          "all stories"
+        ],
+        "summary": "get Story By Id",
+        "description": "get Story By Id.",
+        "operationId": "getStoryById",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "path",
+            "name": "storyId",
+            "type": "string",
+            "required": true,
+            "description": "storyId of story to get."
+          }
+        ],
+       "responses": {
+          "200": {
+            "description": "A JSON of StoryDetails",
+            "schema": {
+              "$ref": "#/definitions/StoryDetails"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/retrieveFollowingsStories": {
+      "get": {
+        "tags": [
+          "all stories"
+        ],
+        "summary": "retrieve following Stories",
+        "description": "it will return not seen stories first with indication for not seen sorted by created date FIFO",
+        "operationId": "retrieveFollowingsStories",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "required": false,
+            "default": 1,
+            "description": "Page Number to get."
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "type": "integer",
+            "required": false,
+            "default": 10,
+            "description": "page size of items to return."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of RetrieveFollowingsStoriesRespond",
+            "schema": {
+              "$ref": "#/definitions/RetrieveFollowingsStoriesRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hashtag/searchHashtags": {
+      "get": {
+        "tags": [
+          "search"
+        ],
+        "summary": "retrieve all the trending hashtags",
+        "description": "this api will retrieve all the trending hashtags with stories (trending hashtag = the one that most viewed),the results will be sorted from the most viewed.",
+        "operationId": "searchHashtags",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "searchText",
+            "type": "string",
+            "required": false,
+            "description": "the text that searched for - optional input in case its empty will retrieve all."
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "required": false,
+            "default": 1,
+            "description": "Page Number to get."
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "type": "integer",
+            "required": false,
+            "default": 10,
+            "description": "page size of items to return."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SearchHashtagsResponse",
+            "schema": {
+              "$ref": "#/definitions/SearchHashtagsResponse"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{storyId}/getStorySeenByUsers": {
+      "get": {
+        "tags": [
+          "my stories"
+        ],
+        "summary": "Retrieve story seen by users.",
+        "description": "Retrieve story seen by users.",
+        "operationId": "getStorySeenByUsers",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "storyId",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "required": false,
+            "default": 1,
+            "description": "Page Number to get."
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "type": "integer",
+            "required": false,
+            "default": 10,
+            "description": "page size of items to return."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of GetStorySeenByUsersRespond",
+            "schema": {
+              "$ref": "#/definitions/GetStorySeenByUsersRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deleteStoriesByUserIds": {
+      "post": {
+        "tags": [
+          "all stories"
+        ],
+        "summary": "Delete users stories by ids.",
+        "description": "Delete users stories by ids.",
+        "operationId": "deleteStoriesByUserIds",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "DeleteUsersByIdsRequest",
+            "schema": {
+              "$ref": "#/definitions/DeleteStoriesByUserIdsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of DeleteStoriesByUserIdsRespond",
+            "schema": {
+              "$ref": "#/definitions/DeleteStoriesByUserIdsRespond"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{storyId}/getStoryOwnerId": {
+      "get": {
+        "tags": [
+          "my stories"
+        ],
+        "summary": "get story owner user id.",
+        "description": "get story owner user id.",
+        "operationId": "getStoryOwnerId",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "storyId",
+            "type": "string",
+            "required": true,
+            "description": "the storyId."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of StoryOwnerId",
+            "schema": {
+              "$ref": "#/definitions/StoryOwnerId"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{storyId}/softDeleteByReportContent": {
+      "post": {
+        "tags": [
+          "all stories"
+        ],
+        "summary": "delete content by report",
+        "description": "delete content by report",
+        "operationId": "softDeleteByReportContent",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "storyId",
+            "type": "string",
+            "required": true,
+            "description": "the storyId."
+          },
+          {
+            "in": "body",
+            "name": "DeleteContentByReportRequest",
+            "schema": {
+              "$ref": "#/definitions/DeleteContentByReportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{contentId}/restoreDeletedContentByReport": {
+      "post": {
+        "tags": [
+          "all stories"
+        ],
+        "summary": "restore deleted content by report",
+        "description": "restore deleted content by report",
+        "operationId": "restoreDeletedContentByReport",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "contentId",
+            "type": "string",
+            "required": true,
+            "description": "the contentId."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{contentId}/hardDeleteByAdmin": {
+      "post": {
+        "tags": [
+          "all stories"
+        ],
+        "summary": "hard delete content by admin",
+        "description": "hard delete content by admin",
+        "operationId": "hardDeleteByAdmin",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "contentId",
+            "type": "string",
+            "required": true,
+            "description": "the contentId."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{userId}/invertUserStatus": {
+      "post": {
+        "tags": [
+          "all stories"
+        ],
+        "summary": "Invert the user activation status for all owned content, so we can hide any content owned by deactivated user",
+        "description": "Invert the user activation status for all owned content, so we can hide any content owned by deactivated user",
+        "operationId": "invertUserStatus",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "string",
+            "required": true,
+            "description": "the userId."
+          },
+          {
+            "in": "body",
+            "name": "status",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserStatus"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{userId}/softDeleteRestoreContentByDeleteAccount": {
+      "post": {
+        "tags": [
+          "all stories"
+        ],
+        "summary": "Invert the user content as marked for delete based on delete account process",
+        "description": "Invert the user content as marked for delete based on delete account process",
+        "operationId": "softDeleteRestoreContentByDeleteAccount",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "string",
+            "required": true,
+            "description": "the userId."
+          },
+          {
+            "in": "body",
+            "name": "status",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserStatus"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getUploadUrl": {
+      "get": {
+        "tags": [
+          "my stories"
+        ],
+        "summary": "get Upload Url that will be used to upload the media files for story",
+        "description": "the returned URL will live 10 minutes",
+        "operationId": "getUploadUrl",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "fileKey",
+            "type": "string",
+            "required": true,
+            "description": "the file key that will be uploaded."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "UploadUrlResponse",
+            "schema": {
+              "$ref": "#/definitions/UploadUrlResponse"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{storyId}/saveStoryReaction": {
+      "post": {
+        "tags": [
+          "all stories"
+        ],
+        "summary": "React on provided story",
+        "description": "React (LIKE, LOVE, HAHA, WOW, SAD, ANGRY) on story given in the API path",
+        "operationId": "saveStoryReaction",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "storyId",
+            "type": "string",
+            "required": true,
+            "description": "The storyId."
+          },
+          {
+            "in": "body",
+            "name": "ReactionDetailsPayload",
+            "schema": {
+              "$ref": "#/definitions/ReactionDetailsPayload"
+            }
+          }          
+        ],
+        "responses": {
+          "204": {
+            "description": "no contect"
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{storyId}/getStoryReactions": {
+      "get": {
+        "tags": [
+          "all stories"
+        ],
+        "summary": "Retrieve story reactions detail.",
+        "description": "Retrieve story reactions details for certain story.",
+        "operationId": "getStoryReactions",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "storyId",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "required": false,
+            "default": 1,
+            "description": "Page Number to get."
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "type": "integer",
+            "required": false,
+            "default": 10,
+            "description": "page size of items to return."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON of StoryReactionsResponse",
+            "schema": {
+              "$ref": "#/definitions/StoryReactionsResponse"
+            }
+          },
+          "400": {
+            "description": "error 400",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Bad Request",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "401": {
+            "description": "error 401",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Unauthorized",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "404": {
+            "description": "error 404",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180+00:00",
+                "status": "HTTP_STATS",
+                "error": "Not Found",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          },
+          "default": {
+            "description": "error 500",
+            "schema": {
+              "example": {
+                "timestamp": "2021-05-23T22:22:04.180Z",
+                "status": "HTTP_STATS",
+                "error": "Internal Server Error",
+                "message": "ERROR_CODE",
+                "path": "/path"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "HashtagDetails": {
+      "description": "added hashtags to the story",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "hashtagId will be populated in case of using an existing hashtag.",
+          "type": "string"
+        },
+        "text": {
+          "description": "in case its a new hashtag then the text will be populated here.",
+          "type": "string"
+        }
+      }
+    },
+    "PaginationInfo": {
+      "type": "object",
+      "properties": {
+        "pageNumber": {
+          "description": "Current page number",
+          "type": "integer"
+        },
+        "pageSize": {
+          "description": "Number of returned items",
+          "type": "integer"
+        },
+        "totalElements": {
+          "description": "Total number of items",
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "description": "Total number of pages",
+          "type": "integer"
+        }
+      }
+    },
+    "HashtagInfo": {
+      "description": "Hashtag Infos",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "hashtag id will be populated in case of using an existing hashtag.",
+          "type": "string"
+        },
+        "text": {
+          "description": "in case its a new hashtag then the text will be populated here.",
+          "type": "string"
+        }
+      }
+    },
+    "SearchHashtagsResponse": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HashtagDetails"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/PaginationInfo"
+        }
+      ]
+    },
+    "RetrieveFollowingsStoriesRespond": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserStories"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/PaginationInfo"
+        }
+      ]
+    },
+    "UsersStories": {
+      "description": "User Details Object",
+      "type": "object",
+      "properties": {
+        "userDetails": {
+          "$ref": "#/definitions/PublicUserInfo"
+        },
+        "seen": {
+          "type": "boolean",
+          "default": false
+        },
+        "storyDetails": {
+          "$ref": "#/definitions/StoryDetails"
+        }
+      }
+    },
+    "FollowingsStories": {
+      "description": "User Details Object",
+      "type": "object",
+      "properties": {
+        "seen": {
+          "type": "boolean",
+          "default": false
+        },
+        "storyDetails": {
+          "$ref": "#/definitions/StoryDetails"
+        }
+      }
+    },
+    "UserStories": {
+      "description": "User Details Object",
+      "type": "object",
+      "properties": {
+        "userDetails": {
+          "$ref": "#/definitions/PublicUserInfo"
+        },
+        "userStories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FollowingsStories"
+          }
+        }
+      }
+    },
+    "GetMyStoriesRespond": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MyUserStoryDetails"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/PaginationInfo"
+        }
+      ]
+    },
+    "PublicUserInfoRespond": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PublicUserInfo"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/PaginationInfo"
+        }
+      ]
+    },
+    "UserDetails": {
+      "description": "User Details Object",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "profilePictureUrl": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "CustomPublicUserInfo": {
+      "description": "Public User Info Object",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "profilePictureUrl": {
+          "type": "string"
+        },
+        "followedByMe": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PublicUserInfo": {
+      "description": "Public User Info Object",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "profilePictureUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "MyUserStoryDetails": {
+      "type": "object",
+      "properties": {
+        "storyId": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "seenBy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublicUserInfo"
+          }
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "mediaDetails": {
+          "$ref": "#/definitions/MediaDetails"
+        },
+        "hashtags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HashtagDetails"
+          }
+        },
+        "seenUsersNumber": {
+          "type": "integer",
+          "default": 0,
+          "description": "The number of users have seen the story."
+        }
+      }
+    },
+    "AddStoryRequest": {
+      "type": "object",
+      "properties": {
+        "caption": {
+          "type": "string"
+        },
+        "mediaDetails": {
+          "$ref": "#/definitions/MediaDetails"
+        },
+        "hashtags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HashtagDetails"
+          }
+        },
+        "toHls": {
+        	"type": "boolean",
+         	"default": false
+        }
+      },
+      "required": [
+        "mediaDetails"
+      ]
+    },
+    "DeleteContentByReportRequest": {
+      "type": "object",
+      "properties": {
+        "reportId": {
+          "type": "string"
+        }
+      }
+    },
+    "AddStoryResponse": {
+      "type": "object",
+      "properties": {
+        "storyId": {
+          "type": "string"
+        }
+      }
+    },
+    "SoundDetails": {
+      "description": "Sound Details Object",
+      "type": "object",
+      "properties": {
+        "soundUrl": {
+          "type": "string"
+        },
+        "soundId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "soundUrl"
+      ]
+    },
+    "MediaDetails": {
+      "description": "media Details Object",
+      "type": "object",
+      "properties": {
+        "mediaType": {
+          "type": "string",
+          "enum": [
+            "VIDEO",
+            "IMAGE"
+          ]
+        },
+        "mediaUrl": {
+          "type": "string"
+        },
+        "thumb": {
+          "type": "string"
+        },
+        "soundDetails": {
+          "$ref": "#/definitions/SoundDetails"
+        }
+      },
+      "required": [
+        "mediaType",
+        "mediaUrl"
+      ]
+    },
+    "StoryDetails": {
+      "type": "object",
+      "properties": {
+        "storyId": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "mediaDetails": {
+          "$ref": "#/definitions/MediaDetails"
+        },
+        "hashtags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HashtagDetails"
+          }
+        }
+      }
+    },
+    "GetFollowingStoriesRespond": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UsersStories"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/PaginationInfo"
+        }
+      ]
+    },
+    "GetStorySeenByUsersRespond": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "storyId": {
+              "type": "string"
+            },
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomPublicUserInfo"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/PaginationInfo"
+        }
+      ]
+    },
+    "DeleteStoriesByUserIdsRequest": {
+      "description": "The delete users stories by ids request",
+      "type": "object",
+      "properties": {
+        "usersIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+          }
+        }
+      },
+      "required": [
+        "usersIds"
+      ]
+    },
+    "DeleteStoriesByUserIdsRespond": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DeleteUsersStatus"
+      }
+    },
+    "DeleteUsersStatus": {
+      "description": "Delete users stories status per user",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "deleteStatus": {
+          "type": "boolean"
+        }
+      }
+    },
+    "StoryOwnerId": {
+      "description": "story owner user id",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "UserStatus": {
+      "description": "User status",
+      "type": "object",
+      "properties": {
+        "active": {
+          "type": "boolean"
+        }
+      },
+      "required": ["active"]
+    },
+     "UploadUrlResponse": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "ReactionDetailsPayload": {
+      "description": "Reaction details",
+      "type": "object",
+      "properties": {
+        "reactionType": {
+          "type": "string",
+          "enum": [
+            "LIKE",
+			"LOVE",
+			"HAHA",
+			"WOW",
+			"SAD",
+			"ANGRY"
+          ],
+          "default": "LIKE"
+        }
+      }
+    },
+    "StoryReactionInfo": {
+      "description": "The story reations info",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "storyId": {
+          "type": "string"
+        },
+        "reactionType": {
+          "type": "string"
+        }
+      }
+    },
+    "StoryReactionsResponse": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StoryReactionInfo"
+              }
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/PaginationInfo"
+        }
+      ]
+    }
+  }
+}
